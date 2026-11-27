@@ -2,7 +2,7 @@
  * aerogu34 キーマップ(ラッパー)
  *
  * ★実際のキー割り当ては共通リポジトリで定義★
- *   https://github.com/bakajaan/zmk-keymap-common
+ *   https://github.com/lionexile-cpu/zmk-keymap-common
  *   include/fue/keymap34.dtsi
  * キーマップ変更は上記ファイルを編集すること。
  *

@@ -11,7 +11,7 @@ manifest:
     - name: prospector
       url-base: https://github.com/t-ogura
     - name: bakajaan
-      url-base: https://github.com/bakajaan
+      url-base: https://github.com/lionexile-cpu
   # =====================================================================
   # 【SHAピン留め 2026-07-26】外部依存は動作確認済みのコミットに固定。
   # 上流ブランチの更新でビルドや挙動が勝手に変わるのを防ぐ。
@@ -60,7 +60,7 @@ manifest:
     # 発生元のソースファイル名と行番号としてウォッチドッグ記録に残す。
     - name: zmk-feature-ctlr-assert
       remote: bakajaan
-      revision: 59d09925dc64bc3aaf30accfbbdf42ea922c0948
+      revision: 1eede79e762b469a34d2def57a24da5be862f7b8
     - name: zmk-module-runtime-input-processor
       remote: cormoran
       revision: 43618985f8c9d5457cc333b7ca0733f2d361911e
@@ -78,7 +78,7 @@ manifest:
     # ページング応答へ変更。通知はシステムワークキューを塞いでフリーズする。
     - name: zmk-feature-key-usage
       remote: bakajaan
-      revision: bf52958c5ccce5aa12c6f112d5e03fd498b9c8a4
+      revision: b796c3682eb81c6303f7b995ae396aee61762b0b
     # OS検出 + 接続先ごとのデフォルトレイヤー切替 (DYA Studio接続タブ用 2026-07-26追加)
     # os-detection は custom-settings に依存するが、上でSHA固定済みのため import は使わない
     - name: zmk-feature-os-detection
@@ -88,15 +88,15 @@ manifest:
     # 旧: cormoran/zmk-feature-default-layer は「接続先ごと」だけの対応で、
     # OS別マッピングもStudio RPCも持たないため、DYA Studioの接続タブにある
     # 「OSごとのデフォルトレイヤー」が機能しなかった。
-    # 新: bakajaan/zmk-feature-default-layer-os は同じKconfig名・同じ&df・
+    # 新: lionexile-cpu/zmk-feature-default-layer-os は同じKconfig名・同じ&df・
     # 同じsettingsキー(旧レコードは自動移行)のまま、OS別マッピングと
     # cormoran__default_layer サブシステムを追加したドロップイン置換。
     # 旧モジュールとは同居できない(compatible/Kconfigが衝突する)。
-    # 【2026-07-27 修正】0f4cfd6d には CONFIG_ZMK_BLE_PROFILE_COUNT (存在しないKconfig)
-    # を使うビルドエラーがあったため、43cba0469 (修正済みコミット) にSHAを更新。
+    # 【2026-07-27 修正】615f8c4b には CONFIG_ZMK_BLE_PROFILE_COUNT (存在しないKconfig)
+    # を使うビルドエラーがあったため、ec9001b1e (修正済みコミット) にSHAを更新。
     - name: zmk-feature-default-layer-os
       remote: bakajaan
-      revision: 43cba0469c512d3d98f4bebca4a7edbbf7e7cc95
+      revision: ec9001b1e31349c42ba606144652118af6b92651
     # スレッドスタック使用量モニター + ログキャプチャ (DYA Studio Troubleshootingタブ用 2026-07-27追加・jisaku_1と同SHA)
     # cormoran__devtool サブシステム: スタックの高水位線・ログをリアルタイムで確認できる。
     # スタックオーバーフロー起因のウォッチドッグクラッシュの原因調査に有用。
