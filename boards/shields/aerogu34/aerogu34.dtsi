@@ -1,6 +1,8 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <physical_layouts.dtsi>
 #include <behaviors/battery_history_request.dtsi>
+// &ota_dfu / &ser_dfu (zmk-feature-ota-dfu)。両ハーフで使えるようshield共通dtsiで読み込む
+#include <behaviors/ota_dfu.dtsi>
 
 / {
     chosen {

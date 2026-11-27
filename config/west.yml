@@ -61,6 +61,12 @@ manifest:
     - name: zmk-feature-ctlr-assert
       remote: bakajaan
       revision: 1eede79e762b469a34d2def57a24da5be862f7b8
+    # OTA/シリアルDFUモード再起動ビヘイビア (2026-11-27追加・両キーボード同SHA)
+    # &ota_dfu (BLE OTA DFU, GPREGRET=0xA8) / &ser_dfu (USB CDCシリアルDFU, 0x4E)。
+    # 会社PCでUSBマスストレージ(UF2)が使えない場合の更新手段。
+    - name: zmk-feature-ota-dfu
+      remote: bakajaan
+      revision: 16c8bd7630debe517aa3b029c1dd5a316fc8ca93
     - name: zmk-module-runtime-input-processor
       remote: cormoran
       revision: 43618985f8c9d5457cc333b7ca0733f2d361911e
