@@ -34,7 +34,7 @@ FUE_L0_THUMBS
         };
 
         function_layer {
-            display-name = "Function";
+            display-name = "Symbol";
             bindings = <
 FUE_L1_ROW1
 FUE_L1_ROW2
@@ -44,7 +44,7 @@ FUE_L1_THUMBS
         };
 
         number_layer {
-            display-name = "Number";
+            display-name = "NumNav";
             bindings = <
 FUE_L2_ROW1
 FUE_L2_ROW2
@@ -54,7 +54,7 @@ FUE_L2_THUMBS
         };
 
         scroll_layer {
-            display-name = "Scroll";
+            display-name = "Function";
             bindings = <
 FUE_L3_ROW1
 FUE_L3_ROW2
