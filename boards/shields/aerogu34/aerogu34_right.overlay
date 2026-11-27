@@ -26,6 +26,12 @@
 
 &scroll_runtime_input_processor {
     processor-label = "rscroll";
+    /* スクロール量 (2026-11-27): 既定の1/60は「1単位=1ノッチ」前提の値。
+     * このファームは CONFIG_ZMK_POINTING_SMOOTH_SCROLLING=y で1単位=1/16ノッチの
+     * 高解像度スクロールを送るため、1/60だとボール約30mm転がして1ノッチしか進まなかった。
+     * 1/5 で約2.5mmにつき1ノッチ(なめらかに少しずつ進む)。Studioのトラックボール設定で変更可。 */
+    scale-multiplier = <1>;
+    scale-divisor = <5>;
     x-codes = <INPUT_REL_X>;
     y-codes = <INPUT_REL_Y>;
     xy-to-scroll-enabled;
