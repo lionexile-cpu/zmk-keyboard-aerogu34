@@ -12,6 +12,11 @@
 #define ZMK_POINTING_DEFAULT_SCRL_VAL 200
 
 #include <dt-bindings/zmk/mouse.h>
+
+/* ランタイムマクロ挙動 (&rmacro) の定義。DYA StudioのMacro & Comboタブから
+ * キーへ割り当てる際に使用 (zmk-feature-runtime-macro 2026-11-27追加・jisaku_1と統一) */
+#include <behaviors/runtime_macro.dtsi>
+
 #include <fue/keymap34.dtsi>
 
 / {

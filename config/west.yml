@@ -64,6 +64,17 @@ manifest:
     - name: zmk-module-runtime-input-processor
       remote: cormoran
       revision: 43618985f8c9d5457cc333b7ca0733f2d361911e
+    # ランタイムマクロ / ランタイムコンボ (DYA Studio Macro & Comboタブ用 2026-11-27追加)
+    # jisaku_1と同SHA。コンボ・マクロをファーム書き換えなしでStudioから追加/編集できる。
+    # 共通依存の zmk-feature-custom-settings は下でSHA固定済み (top-level manifestが優先)。
+    - name: zmk-feature-runtime-macro
+      remote: cormoran
+      revision: 38530962eb7061b60efcb98e84585cfb1f0cb6de
+      import: true
+    - name: zmk-feature-runtime-combo
+      remote: cormoran
+      revision: d9490e7b5d41c516221d131241009e81740efcee
+      import: true
     # カスタム設定 (設定タブの詳細設定 + os-detectionの依存 2026-07-26追加・jisaku_1と同SHA)
     - name: zmk-feature-custom-settings
       remote: cormoran
