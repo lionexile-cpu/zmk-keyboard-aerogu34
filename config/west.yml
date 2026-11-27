@@ -143,6 +143,11 @@ manifest:
     - name: zmk-feature-runtime-holdtap
       remote: bakajaan
       revision: e6c97c4e4a80a336c029dfaf83570a9b9f50b77b
+    # ポインター加速 (2026-11-27追加)
+    # 速度に応じてトラックボールの移動量を変える。DYA Studio の詳細設定 (ptr_accel) から調整可。
+    - name: zmk-feature-pointer-accel
+      remote: bakajaan
+      revision: b44bdf762ad4b3ff1e4cba4cf83ad257850842bb
     # 共通キーマップ定義(jisaku_1 / aerogu34で共有・main追従)
     - name: zmk-keymap-common
       remote: bakajaan

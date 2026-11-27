@@ -4,6 +4,7 @@
 #include <input/processors/runtime-input-processor.dtsi>
 #include <dt-bindings/zmk/runtime_input_processor.h>
 #include <dt-bindings/zmk/input_transform.h>
+#include <input/processors/pointer_accel.dtsi>
 
 &default_transform {
     col-offset = <5>;
@@ -25,6 +26,12 @@
 
 &scroll_runtime_input_processor {
     processor-label = "rscroll";
+    /* スクロール量 (2026-11-27): 既定の1/60は「1単位=1ノッチ」前提の値。
+     * このファームは CONFIG_ZMK_POINTING_SMOOTH_SCROLLING=y で1単位=1/16ノッチの
+     * 高解像度スクロールを送るため、1/60だとボール約30mm転がして1ノッチしか進まなかった。
+     * 1/5 で約2.5mmにつき1ノッチ(なめらかに少しずつ進む)。Studioのトラックボール設定で変更可。 */
+    scale-multiplier = <1>;
+    scale-divisor = <5>;
     x-codes = <INPUT_REL_X>;
     y-codes = <INPUT_REL_Y>;
     xy-to-scroll-enabled;
@@ -44,19 +51,40 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        /* Chain order:
-         *   deadzone  - filter sub-threshold noise
-         *   xy_transform - invert both axes (sensor-mounting orientation)
-         *   mouse_runtime - DYA Studio runtime config (CPI / snipe / etc)
-         *   temp_layer 4 1000ms - auto-enable Mouse layer (4) on movement,
-         *     turn back off after 1s of trackball inactivity
-         *   scroll_runtime - convert XY -> scroll on layer 3 only */
+        /* Chain order (2026-11-27 見直し):
+         *   deadzone      - 親指を添えたときの微小なブレを捨てる(作者が薄型・小径向けに入れたもの。維持)
+         *   xy_transform  - センサー取付向きに合わせて両軸反転
+         *   mouse_runtime - DYA Studioで変更できる速度倍率 + 自動マウスレイヤー(下記)
+         *   scroll_runtime- Functionレイヤー(3)のときだけXYをスクロールに変換
+         *   pointer_accel - 速度に応じた加速(スクロールには掛からない)
+         * 旧 &zip_temp_layer 4 1000 は「キーを押しても1秒間マウスレイヤーのまま」で
+         * 打鍵直後の J/L/I がクリックに化けていたため、mouse_runtime の自動レイヤーに置換。 */
         input-processors = <&deadzone_processor
                             &zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)
                             &mouse_runtime_input_processor
-                            &zip_temp_layer 4 1000
-                            &scroll_runtime_input_processor>;
+                            &scroll_runtime_input_processor
+                            &zip_pointer_accel>;
     };
+};
+
+/* 自動マウスレイヤー (DYA Studio のトラックボール設定から変更可)
+ * - 直前の打鍵から250ms以内のボール移動では入らない(打鍵中に親指がかすっても誤爆しない)
+ * - マウスレイヤーで何も割り当てていないキーを押した瞬間に通常入力へ戻る
+ * - ボールを止めてから800ms後に自動で戻る */
+&mouse_runtime_input_processor {
+    temp-layer-enabled;
+    temp-layer = <4>;
+    temp-layer-activation-delay-ms = <250>;
+    temp-layer-deactivation-delay-ms = <800>;
+};
+
+/* ポインター加速 (DYA Studio の詳細設定 ptr_accel から変更可)
+ * ゆっくり: 等倍(従来どおりの精密さ) / 素早く: 最大2倍。間はなめらかにつなぐ。 */
+&zip_pointer_accel {
+    min-percent = <100>;
+    max-percent = <200>;
+    speed-low = <400>;
+    speed-high = <3000>;
 };
 
 &spi0 {
