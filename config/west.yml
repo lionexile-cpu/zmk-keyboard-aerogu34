@@ -66,7 +66,7 @@ manifest:
     # 会社PCでUSBマスストレージ(UF2)が使えない場合の更新手段。
     - name: zmk-feature-ota-dfu
       remote: bakajaan
-      revision: b45b360007d8d603e36163b1cb95896c797a592e
+      revision: 16c8bd7630debe517aa3b029c1dd5a316fc8ca93
     - name: zmk-module-runtime-input-processor
       remote: cormoran
       revision: 43618985f8c9d5457cc333b7ca0733f2d361911e
