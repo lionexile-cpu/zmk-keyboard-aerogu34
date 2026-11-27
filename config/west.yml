@@ -129,6 +129,14 @@ manifest:
       remote: prospector
       revision: 400a1743f56332a2e8344f74a572f62236cdfa29
       path: modules/prospector-zmk-module
+    # 実行時に変更できるホールドタップ (2026-11-27追加)
+    # &lt / &mt / &aklt / &akmt の flavor・tapping-term-ms などを
+    # DYA Studio の詳細設定 (rt_holdtap) からファーム書き換えなしで変更・保存できる。
+    # 共通キーマップ側が __has_include でこのモジュールを検出してドライバを切り替える。
+    # ホールドタップのイベント処理順を標準と同じに保つため、他の機能モジュールより後に置くこと。
+    - name: zmk-feature-runtime-holdtap
+      remote: bakajaan
+      revision: e6c97c4e4a80a336c029dfaf83570a9b9f50b77b
     # 共通キーマップ定義(jisaku_1 / aerogu34で共有・main追従)
     - name: zmk-keymap-common
       remote: bakajaan
