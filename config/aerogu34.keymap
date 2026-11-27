@@ -19,6 +19,18 @@
 
 #include <fue/keymap34.dtsi>
 
+/* runtime-input-processor の既定ビヘイビア(1.5x/0.5x Speed Scroll・X/Y Axis Snap)は
+ * processor-name = "scroll" を探すが、このキーボードのスクロール用プロセッサは
+ * "rscroll" なので見つからず初期化に失敗していた。失敗したビヘイビアは local id が
+ * 0 のまま残り、DYA Studio がビヘイビア詳細を取得した瞬間にファームが落ちて
+ * 全キーが「—」表示になっていた (2026-11-27)。名前を合わせる。 */
+#if __has_include(<behaviors/runtime-input-processor.dtsi>)
+&rip_hscr { processor-name = "rscroll"; };
+&rip_lscr { processor-name = "rscroll"; };
+&rip_ysnap { processor-name = "rscroll"; };
+&rip_xsnap { processor-name = "rscroll"; };
+#endif
+
 / {
     keymap {
         compatible = "zmk,keymap";
